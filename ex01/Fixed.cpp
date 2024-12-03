@@ -2,27 +2,25 @@
 #include <iostream>
 #include <cmath>
 
-Fixed::Fixed ( void ) {
+Fixed::Fixed ( void ): raw(0) {
     std::cout << "Default constructor called" << std::endl;
-    this->setRawBits( 0 );
     return ;
 }
 
 Fixed::Fixed( Fixed const &fixed ) {
     std::cout << "Copy constructor called" << std::endl;
-    this->raw = fixed.getRawBits();
+    *this = fixed;
     return ;
 }
 
-Fixed::Fixed(int raw) {
+Fixed::Fixed(int raw): raw(raw << inte) {
     std::cout << "Int constructor called" << std::endl;
-    this->raw = raw;
     return ;
 }
 
 Fixed::Fixed(float f) {
     std::cout << "Float constructor called" << std::endl;
-    this->f = f;
+    this->raw = roundf(f * pow(2, inte));
     return ;
 }
 
@@ -37,14 +35,33 @@ void    Fixed::setRawBits( int const raw ) {
 }
 
 int     Fixed::getRawBits( void ) const {
-    std::cout << "getRawBits member function called" << std::endl;
     return this->raw;
 }
 
-Fixed     Fixed::operator=(const Fixed &fixed) {
+int     Fixed::getInte( void ){
+    return Fixed::inte;
+}
+
+Fixed&     Fixed::operator=(const Fixed &fixed) {
     std::cout << "Copy assignment operator called" << std::endl;
     this->raw = fixed.getRawBits();
     return *this;
 }
 
-// number = 2^(n)
+float   Fixed::toFloat( void ) const {
+    return this->raw / pow(2, inte);
+}
+
+int     Fixed::toInt( void ) const {
+    return this->raw >> this->inte;
+}
+
+// operator <<
+
+std::ostream& operator<<(std::ostream& o, const Fixed& nbr) {
+    if (nbr.getRawBits() % Fixed::getInte())
+        o << nbr.toFloat();
+    else
+        o << nbr.toInt();
+    return o;
+}

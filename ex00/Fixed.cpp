@@ -2,9 +2,8 @@
 #include <iostream>
 #include <cmath>
 
-Fixed::Fixed ( void ) {
+Fixed::Fixed ( void ): raw(0) {
     std::cout << "Default constructor called" << std::endl;
-    this->setRawBits( 0 );
     return ;
 }
 
@@ -15,7 +14,7 @@ Fixed::~Fixed ( void ) {
 
 Fixed::Fixed( Fixed const &fixed ) {
     std::cout << "Copy constructor called" << std::endl;
-    this->raw = fixed.getRawBits(); // fait une boucle
+    *this = fixed; // fait une boucle
     return ;
 }
 
@@ -29,7 +28,7 @@ int     Fixed::getRawBits( void ) const {
     return this->raw;
 }
 
-Fixed     Fixed::operator=(const Fixed &fixed) {
+Fixed&     Fixed::operator=(const Fixed &fixed) {
     std::cout << "Copy assignment operator called" << std::endl;
     this->raw = fixed.getRawBits();
     return *this;

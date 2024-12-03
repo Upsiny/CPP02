@@ -14,7 +14,7 @@ TARGET =		a.out
 
 CXX =			c++
 
-CXXFLAGS =		-Wall -Wextra -Werror -I. -g3 -fsanitize=address
+CXXFLAGS =		-Wall -Wextra -Werror -I. #-g3 -fsanitize=address
 
 SRCS =			main.cpp			\
 				Fixed.cpp			\
