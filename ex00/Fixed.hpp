@@ -6,18 +6,18 @@
 
 class   Fixed {
     private :
-    float   floa = 0;
-    int     integer = 0;
+    int                 raw;
+    const static int    inte = 8;
 
     public :
-    Fixed::Fixed();
-    Fixed::Fixed(Fixed Fixed);
-    Fixed::Fixed( int i );
-    Fixed::Fixed( float i );
-    Fixed::~Fixed();
+    Fixed();
+    Fixed(Fixed const &fixed);
+    ~Fixed();
 
-    float   toFloat( void ) const;
-    int     toInt( void ) const;
-}
+    int     getRawBits( void ) const;
+    void    setRawBits( int const raw );
+    Fixed   operator=(const Fixed &Fixed);
+
+};
 
 #endif

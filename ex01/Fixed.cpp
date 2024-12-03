@@ -8,14 +8,26 @@ Fixed::Fixed ( void ) {
     return ;
 }
 
-Fixed::~Fixed ( void ) {
-    std::cout << "Destructor called" << std::endl;
+Fixed::Fixed( Fixed const &fixed ) {
+    std::cout << "Copy constructor called" << std::endl;
+    this->raw = fixed.getRawBits();
     return ;
 }
 
-Fixed::Fixed( Fixed const &fixed ) {
-    std::cout << "Copy constructor called" << std::endl;
-    this->raw = fixed.getRawBits(); // fait une boucle
+Fixed::Fixed(int raw) {
+    std::cout << "Int constructor called" << std::endl;
+    this->raw = raw;
+    return ;
+}
+
+Fixed::Fixed(float f) {
+    std::cout << "Float constructor called" << std::endl;
+    this->f = f;
+    return ;
+}
+
+Fixed::~Fixed ( void ) {
+    std::cout << "Destructor called" << std::endl;
     return ;
 }
 
